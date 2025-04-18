@@ -1,0 +1,137 @@
+[gd_scene load_steps=20 format=3 uid="uid://bns4lb5tdai7s"]
+
+[ext_resource type="Script" uid="uid://bvb3joxfvq8ky" path="res://part_4/scripts/enemy_mushroom.gd" id="1_cxtrw"]
+[ext_resource type="Texture2D" uid="uid://drlu80kfl0kqk" path="res://assets/enemy/mushroom/Idle (32x32).png" id="1_mse42"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwf20"]
+atlas = ExtResource("1_mse42")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hkka"]
+atlas = ExtResource("1_mse42")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_if1cn"]
+atlas = ExtResource("1_mse42")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_beu0i"]
+atlas = ExtResource("1_mse42")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hhdb"]
+atlas = ExtResource("1_mse42")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu8lh"]
+atlas = ExtResource("1_mse42")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0akk"]
+atlas = ExtResource("1_mse42")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2nfq"]
+atlas = ExtResource("1_mse42")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8yc8"]
+atlas = ExtResource("1_mse42")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gxjw"]
+atlas = ExtResource("1_mse42")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s32bn"]
+atlas = ExtResource("1_mse42")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lveey"]
+atlas = ExtResource("1_mse42")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoeao"]
+atlas = ExtResource("1_mse42")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ys3l"]
+atlas = ExtResource("1_mse42")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m76co"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwf20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hkka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_if1cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_beu0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hhdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu8lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0akk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2nfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8yc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gxjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s32bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lveey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoeao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ys3l")
+}],
+"loop": true,
+"name": &"mushroom_idle",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfmj4"]
+size = Vector2(68, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4h02"]
+size = Vector2(70, 58)
+
+[node name="EnemyMushroom" type="RigidBody2D"]
+script = ExtResource("1_cxtrw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.89972, 2.89972)
+sprite_frames = SubResource("SpriteFrames_m76co")
+animation = &"mushroom_idle"
+autoplay = "mushroom_idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17.5)
+shape = SubResource("RectangleShape2D_jfmj4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_m4h02")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

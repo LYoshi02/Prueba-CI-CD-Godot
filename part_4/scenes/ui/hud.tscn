@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://tw2rbn5whxsg"]
+
+[ext_resource type="Script" uid="uid://md50k0ocj0is" path="res://part_4/scripts/hud.gd" id="1_4vx7c"]
+[ext_resource type="Texture2D" uid="uid://cup17k24k6qub" path="res://assets/game_elements/Heart.png" id="1_a15ag"]
+[ext_resource type="Script" uid="uid://bxysc5vnqlotb" path="res://part_4/scripts/pause.gd" id="2_4vx7c"]
+[ext_resource type="PackedScene" uid="uid://cmievrfokxnrd" path="res://part_4/scenes/ui/button.tscn" id="3_3rx8b"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("hearts")]
+script = ExtResource("1_4vx7c")
+hearts = [NodePath("Hearts/HBoxContainer/Heart1"), NodePath("Hearts/HBoxContainer/Heart2"), NodePath("Hearts/HBoxContainer/Heart3")]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 233.0
+offset_bottom = 82.0
+
+[node name="PointsLabel" type="Label" parent="Panel"]
+unique_name_in_owner = true
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Points: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hearts" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -233.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 82.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.5
+offset_top = -28.5
+offset_right = 89.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart1" type="TextureRect" parent="Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_a15ag")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_a15ag")
+expand_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_a15ag")
+expand_mode = 2
+
+[node name="Pause" type="Node" parent="."]
+script = ExtResource("2_4vx7c")
+
+[node name="PausePanel" type="Panel" parent="Pause"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Pause/PausePanel"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -169.5
+offset_right = 87.0
+offset_bottom = -86.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "GAME PAUSED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -53.0
+offset_right = 162.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ResumeButton" parent="Pause/PausePanel/VBoxContainer" instance=ExtResource("3_3rx8b")]
+process_mode = 3
+layout_mode = 2
+text = "Resume"
+
+[node name="MenuButton" parent="Pause/PausePanel/VBoxContainer" instance=ExtResource("3_3rx8b")]
+process_mode = 3
+layout_mode = 2
+text = "Go to Main Menu"
+
+[connection signal="pressed" from="Pause/PausePanel/VBoxContainer/ResumeButton" to="Pause" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Pause/PausePanel/VBoxContainer/MenuButton" to="Pause" method="_on_menu_button_pressed"]
