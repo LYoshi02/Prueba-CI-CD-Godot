@@ -28,6 +28,9 @@ jobs:
       - name: Check Godot version
         run: godot --version
 
+      - name: Download export templates
+        run: godot -v --download-export-templates
+
       - name: Export HTML5
         run: |
           mkdir -p exports/web
