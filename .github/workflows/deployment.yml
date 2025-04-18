@@ -28,8 +28,12 @@ jobs:
       - name: Check Godot version
         run: godot --version
 
-      - name: Download export templates
-        run: godot -v --download-export-templates
+      - name: Download export templates manually
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          wget https://downloads.tuxfamily.org/godotengine/4.4.0/export_templates/Godot_v4.4-stable_export_templates.tpz -O templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/4.4.stable
+          tar -xf templates.tpz -C ~/.local/share/godot/export_templates/4.4.stable --strip-components=1
 
       - name: Export HTML5
         run: |
