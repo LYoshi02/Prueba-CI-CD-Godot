@@ -24,6 +24,15 @@ jobs:
         with:
           lfs: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          cache: "npm"
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
       - name: Setup Godot
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
@@ -33,15 +42,6 @@ jobs:
         run: |
           mkdir -v -p exports/web
           godot --headless --verbose --export-release "Web" "exports/web/index.html"
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.14.0
-          cache: "npm"
-
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
         run: netlify deploy --dir=exports/web --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --prod
