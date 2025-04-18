@@ -23,6 +23,10 @@ jobs:
         with:
           version: "4.4.0"
           export-templates: true
+          use-dotnet: false
+
+      - name: Check Godot version
+        run: godot --version
 
       - name: Export HTML5
         run: |
