@@ -16,6 +16,8 @@ jobs:
   # Single deploy job since we're just deploying
   deploy:
     runs-on: ubuntu-22.04
+    container:
+      image: barichello/godot-ci:4.4
     steps:
       - name: Get code
         uses: actions/checkout@v4
