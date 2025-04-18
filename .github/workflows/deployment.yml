@@ -27,7 +27,7 @@ jobs:
       - name: Export HTML5
         run: |
           mkdir -p exports/web
-          godot --headless --export-release "HTML5" exports/web/index.html
+          godot --headless --export-release "Web" exports/web/index.html
 
       - name: Deploy production to Netlify
         uses: nwtgck/actions-netlify@v2.1.0
