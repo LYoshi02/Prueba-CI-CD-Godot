@@ -40,13 +40,22 @@ jobs:
           name: web
           path: exports/web
 
-      - name: Deploy production to Netlify
-        uses: nwtgck/actions-netlify@v2.1.0
-        with:
-          publish-dir: "./exports/web"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Testing workflow"
-          production-deploy: true
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify
+        run: netlify deploy --dir=exports/web --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+    #   - name: Deploy production to Netlify
+    #     uses: nwtgck/actions-netlify@v2.1.0
+    #     with:
+    #       publish-dir: "./exports/web"
+    #       github-token: ${{ secrets.GITHUB_TOKEN }}
+    #       deploy-message: "Testing workflow"
+    #       production-deploy: true
+    #     env:
+    #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
